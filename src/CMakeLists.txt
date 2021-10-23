@@ -1,5 +1,6 @@
 add_executable(qmlgreet
     main.cpp
+    backend.cpp
     resources.qrc
 )
 
