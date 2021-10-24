@@ -1,0 +1,29 @@
+_pkgbase=qmlgreet
+pkgbase=${_pkgbase}-git
+pkgname=qmlgreet-git
+pkgdesc='QML greetd greeter'
+conflicts=('qmlgreet')
+pkgver=r9.e938b62
+pkgrel=1
+url='https://github.com/nowrep/qmlgreet'
+license=('GPL3')
+arch=('x86_64')
+depends=('qt5-base' 'qt5-declarative' 'qt5-quickcontrols')
+makedepends=('git' 'gcc')
+source=("$_pkgbase::git+$url")
+sha512sums=('SKIP')
+
+pkgver() {
+    cd "$_pkgbase"
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+    cmake -B build -S "$_pkgbase" -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_BUILD_TYPE=Release
+    make -C build
+}
+
+package() {
+    make -C build DESTDIR="$pkgdir" install
+}
