@@ -13,6 +13,9 @@ static QObject *backend_singleton(QQmlEngine *engine, QJSEngine *)
 
 int main(int argc, char *argv[])
 {
+    qputenv("QT_QPA_EGLFS_HIDECURSOR", "1");
+    qputenv("QT_QPA_EGLFS_KMS_ATOMIC", "1");
+
     QGuiApplication app(argc, argv);
 
     QCommandLineParser parser;
