@@ -60,8 +60,7 @@ ApplicationWindow {
                     Component.onCompleted: forceActiveFocus()
                     onAccepted: {
                         if (text) {
-                            Backend.password = text;
-                            Backend.login();
+                            Backend.login(text);
                         }
                     }
                 }
@@ -76,6 +75,14 @@ ApplicationWindow {
             }
             text: "x"
             onClicked: Qt.quit()
+        }
+
+        Connections {
+            target: Backend
+
+            function onSessionSuccess() {
+                Qt.quit();
+            }
         }
     }
 }
