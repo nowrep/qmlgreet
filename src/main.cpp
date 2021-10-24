@@ -18,12 +18,15 @@ int main(int argc, char *argv[])
     QCommandLineParser parser;
     QCommandLineOption userOption({QStringLiteral("u"), QStringLiteral("user")},
                                    QStringLiteral("User."), QStringLiteral("user"));
+    QCommandLineOption iconsOption({QStringLiteral("i"), QStringLiteral("icons")},
+                                    QStringLiteral("User icons directory."), QStringLiteral("path"));
     QCommandLineOption backgroundOption({QStringLiteral("b"), QStringLiteral("background")},
                                        QStringLiteral("Background."), QStringLiteral("path"));
     QCommandLineOption commandOption({QStringLiteral("c"), QStringLiteral("command")},
                                       QStringLiteral("Command."), QStringLiteral("command"));
 
     parser.addOption(userOption);
+    parser.addOption(iconsOption);
     parser.addOption(backgroundOption);
     parser.addOption(commandOption);
 
@@ -33,6 +36,9 @@ int main(int argc, char *argv[])
 
     if (parser.isSet(userOption)) {
         Backend::instance()->setUser(parser.value(userOption));
+    }
+    if (parser.isSet(iconsOption)) {
+        Backend::instance()->setIconsSrc(QUrl::fromLocalFile(parser.value(iconsOption)));
     }
     if (parser.isSet(backgroundOption)) {
         Backend::instance()->setBackgroundSrc(QUrl::fromLocalFile(parser.value(backgroundOption)));

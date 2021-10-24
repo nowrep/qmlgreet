@@ -25,6 +25,16 @@ void Backend::setUser(const QString &user)
     Q_EMIT userChanged();
 }
 
+QUrl Backend::iconsSrc() const
+{
+    return m_iconsSrc;
+}
+
+void Backend::setIconsSrc(const QUrl &url)
+{
+    m_iconsSrc = url;
+}
+
 QUrl Backend::backgroundSrc() const
 {
     return m_backgroundSrc;

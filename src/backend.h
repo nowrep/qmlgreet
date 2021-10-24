@@ -10,6 +10,7 @@ class Backend : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString user READ user WRITE setUser NOTIFY userChanged)
+    Q_PROPERTY(QUrl iconsSrc READ iconsSrc CONSTANT)
     Q_PROPERTY(QUrl backgroundSrc READ backgroundSrc CONSTANT)
     Q_PROPERTY(bool sessionInProgress READ sessionInProgress NOTIFY sessionInProgressChanged)
 
@@ -18,6 +19,9 @@ public:
 
     QString user() const;
     void setUser(const QString &user);
+
+    QUrl iconsSrc() const;
+    void setIconsSrc(const QUrl &url);
 
     QUrl backgroundSrc() const;
     void setBackgroundSrc(const QUrl &url);
@@ -41,6 +45,7 @@ Q_SIGNALS:
 
 private:
     QString m_user;
+    QUrl m_iconsSrc;
     QUrl m_backgroundSrc;
     QString m_command;
     Ipc *m_ipc = nullptr;
