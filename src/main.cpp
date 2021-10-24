@@ -27,11 +27,14 @@ int main(int argc, char *argv[])
                                        QStringLiteral("Background."), QStringLiteral("path"));
     QCommandLineOption commandOption({QStringLiteral("c"), QStringLiteral("command")},
                                       QStringLiteral("Command."), QStringLiteral("command"));
+    QCommandLineOption qmlOption({QStringLiteral("q"), QStringLiteral("qml")},
+                                  QStringLiteral("Custom QML."), QStringLiteral("path"));
 
     parser.addOption(userOption);
     parser.addOption(iconsOption);
     parser.addOption(backgroundOption);
     parser.addOption(commandOption);
+    parser.addOption(qmlOption);
 
     parser.addHelpOption();
     parser.addVersionOption();
@@ -57,7 +60,11 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonType<Backend>(uri, 1, 0, "Backend", backend_singleton);
 
     QQmlApplicationEngine engine;
-    engine.load(QUrl(QStringLiteral("qrc:qml/main.qml")));
+    if (parser.isSet(qmlOption)) {
+        engine.load(QUrl::fromLocalFile(parser.value(qmlOption)));
+    } else {
+        engine.load(QUrl(QStringLiteral("qrc:qml/main.qml")));
+    }
 
     return app.exec();
 }

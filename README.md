@@ -20,6 +20,7 @@ QML [greetd](https://git.sr.ht/~kennylevinsen/greetd) greeter.
       -i, --icons <path>       User icons directory.
       -b, --background <path>  Background.
       -c, --command <command>  Command.
+      -q, --qml <path>         Custom QML.
 
 **Running with eglfs platform**
 
