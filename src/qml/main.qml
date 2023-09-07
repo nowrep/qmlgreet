@@ -59,6 +59,7 @@ ApplicationWindow {
                     Layout.alignment: Qt.AlignCenter
                     Layout.topMargin: 20
                     Layout.preferredWidth: 180
+                    Layout.maximumHeight: 40
                     echoMode: TextInput.Password
                     horizontalAlignment: TextInput.AlignHCenter
                     color: window.color2
